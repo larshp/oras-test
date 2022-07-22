@@ -18,8 +18,7 @@ jobs:
         brew install oras
         oras version
         echo ${{ github.token }} | oras login ghcr.io -u ${{ github.actor }} --password-stdin
-        tar -zcvf src.tar.gz src
-        oras push ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:latest --manifest-config /dev/null:application/vnd.abapgit.abap ./src.tar.gz
+        oras push ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:latest --manifest-config /dev/null:application/vnd.abapgit.abap ./src/:application/vnd.abapgit.abap+tar
         cd ..
         oras pull ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:latest
         ls -salh
