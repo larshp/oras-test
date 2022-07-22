@@ -18,9 +18,9 @@ jobs:
         brew install oras
         oras version
         echo ${{ github.token }} | oras login ghcr.io -u ${{ github.actor }} --password-stdin
-        oras push ghcr.io/${{ github.repository }}/oras-test:latest ./src/hello.txt:application/vnd.unknown.layer.v1+txt
+        oras push ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:latest ./src/hello.txt:application/vnd.unknown.layer.v1+txt
 ##        oras push ghcr.io/${{ github.repository }}/oras-test:latest --manifest-config /dev/null:application/vnd.homebrew.brew.config ./brew-file.tar.gz:application/tar+gzip
     - uses: actions/delete-package-versions@v3
       with:
-        package-name: 'oras-test'
+        package-name: ${{ github.event.repository.name }}
         min-versions-to-keep: 3
