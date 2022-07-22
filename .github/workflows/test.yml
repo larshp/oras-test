@@ -19,8 +19,22 @@ jobs:
         oras version
         echo ${{ github.token }} | oras login ghcr.io -u ${{ github.actor }} --password-stdin
         oras push ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:latest ./src/hello.txt:application/vnd.unknown.layer.v1+txt
-##        oras push ghcr.io/${{ github.repository }}/oras-test:latest --manifest-config /dev/null:application/vnd.homebrew.brew.config ./brew-file.tar.gz:application/tar+gzip
-    - uses: actions/delete-package-versions@v3
+    - name: Delete Untagged Images
+      uses: actions/github-script@v3
+      env:
+        OWNER: ${{ github.repository_owner }}
+        PACKAGE_NAME: ${{ github.event.repository.name }}
+        PER_PAGE: 100
       with:
-        package-name: 'oras-test/oras-test'
-        min-versions-to-keep: 3
+        github-token: ${{ github.token }}
+        script: |
+          const response = await github.request("GET /${{ env.OWNER }}/packages/container/${{ env.PACKAGE_NAME }}/versions",
+            { per_page: ${{ env.PER_PAGE }}
+          });
+          for(version of response.data) {
+              if (version.metadata.container.tags.length == 0) {
+                  console.log("delete " + version.id)
+                  const deleteResponse = await github.request("DELETE /${{ env.OWNER }}/packages/container/${{ env.PACKAGE_NAME }}/versions/" + version.id, { });
+                  console.log("status " + deleteResponse.status)
+              }
+          }
