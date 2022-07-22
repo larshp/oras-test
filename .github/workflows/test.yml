@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: read
+  packages: write
 
 jobs:
   test:
@@ -16,3 +17,4 @@ jobs:
       run: |
         brew install oras
         oras version
+        echo $GITHUB_TOKEN | oras login ghcr.io -u foobar --password-stdin
