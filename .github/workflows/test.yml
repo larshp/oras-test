@@ -22,7 +22,7 @@ jobs:
     - name: Delete Untagged Images
       uses: actions/github-script@v3
       env:
-        OWNER: ${{ github.repository_owner }}
+        OWNER: 'user'
         PACKAGE_NAME: ${{ github.event.repository.name }}
         PER_PAGE: 100
       with:
