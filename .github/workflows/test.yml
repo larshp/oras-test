@@ -13,9 +13,9 @@ jobs:
     timeout-minutes: 10
     steps:
     - uses: actions/checkout@v3
-    - name: stuff
+    - name: Run Stuff
       run: |
         brew install oras
         oras version
         echo ${{ github.token }} | oras login ghcr.io -u ${{ github.actor }} --password-stdin
-#        oras push ghcr.io/${{ github.repository }}/oras-test:latest --manifest-config /dev/null:application/vnd.homebrew.brew.config ./brew-file.tar.gz:application/tar+gzip
+        oras push ghcr.io/${{ github.repository }}/oras-test:latest --manifest-config /dev/null:application/vnd.homebrew.brew.config ./brew-file.tar.gz:application/tar+gzip
