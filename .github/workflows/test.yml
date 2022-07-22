@@ -22,5 +22,5 @@ jobs:
 ##        oras push ghcr.io/${{ github.repository }}/oras-test:latest --manifest-config /dev/null:application/vnd.homebrew.brew.config ./brew-file.tar.gz:application/tar+gzip
     - uses: actions/delete-package-versions@v3
       with:
-        package-name: ${{ github.event.repository.name }}
+        package-name: 'oras-test/oras-test'
         min-versions-to-keep: 3
