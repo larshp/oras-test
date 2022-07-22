@@ -22,3 +22,4 @@ jobs:
         oras push ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:latest --manifest-config /dev/null:application/vnd.abapgit.abap ./src.tar.gz
         cd ..
         oras pull ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:latest
+        ls -salh
