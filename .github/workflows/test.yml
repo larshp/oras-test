@@ -17,4 +17,5 @@ jobs:
       run: |
         brew install oras
         oras version
-        echo ${{ github.token }} | oras login https://ghcr.io -u ${{ github.actor }} --password-stdin
+        echo ${{ github.token }} | oras login ghcr.io -u ${{ github.actor }} --password-stdin
+#        oras push ghcr.io/${{ github.repository }}/oras-test:latest --manifest-config /dev/null:application/vnd.homebrew.brew.config ./brew-file.tar.gz:application/tar+gzip
