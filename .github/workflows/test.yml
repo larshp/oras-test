@@ -18,4 +18,4 @@ jobs:
         brew install oras
         oras version
         echo ${{ github.token }} | oras login ghcr.io -u ${{ github.actor }} --password-stdin
-        oras push ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:latest ./src/hello.txt:application/vnd.unknown.layer.v1+txt
+        oras push ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:latest --manifest-config /dev/null:application/vnd.abapgit.abap ./src/hello.txt
