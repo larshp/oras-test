@@ -23,7 +23,7 @@ jobs:
       uses: actions/github-script@v3
       env:
         OWNER: 'user'
-        PACKAGE_NAME: 'oras-test'
+        PACKAGE_NAME: 'oras-test/oras-test'
         PER_PAGE: 100
       with:
         github-token: ${{ github.token }}
